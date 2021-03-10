@@ -1,5 +1,4 @@
 #include <iostream>
-#include <random>
 #include <cstdlib>
 
 
@@ -11,24 +10,16 @@ class Power {
     int second_int = 0;
 public:
     Power() : first_int(2), second_int(3) {}
-    Power(int first_int, int second_int) {
-        first_int=first_int;
-        second_int=second_int;
-        cout << "Created Power obj first_int=" << first_int << " second_int=" << second_int << endl;
-    }
-    void setFirstInteger(int x) {
-        first_int=x;
-    }
-    void setSecondInteger(int y) {
-        second_int=y;
+    Power(int first, int second) {
+        first_int=first;
+        second_int=second;
     }
     void set(int x, int y) {
         first_int=x;
         second_int=y;
     }
-    int calculate() {
-        cout << "POW" << first_int << second_int << endl;
-        return pow(first_int, second_int);
+    void calculate() {
+        cout << pow(first_int, second_int) << endl;
     }
 };
 
@@ -39,9 +30,7 @@ class RGBA {
     uint8_t m_blue;
     uint8_t m_alpha;
 public:
-    RGBA() : m_red(0), m_green(0), m_blue(0), m_alpha(255) {
-
-    }
+    RGBA() : m_red(0), m_green(0), m_blue(0), m_alpha(255) {}
     void setRed(uint8_t red) {
         m_red = red;
     }
@@ -65,56 +54,84 @@ public:
     }
 };
 
-const int array_length = 10;
+const int max_array_length = 10;
 
 class Stack {
-    int array[array_length] = {0,1,2,3,4,5,6,7,8,9};
-    int stack_length = array_length;
+    int array[max_array_length] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    int stack_length = max_array_length;
 public:
     void reset() {
         for (int & i : array) { i = 0; }
         stack_length = 0;
     }
     bool push(int i) {
-        if (stack_length >= array_length) { return false; }
+        if (stack_length >= max_array_length) {
+            cout << "ERROR! Stackoverflow!" << endl;
+            return false;
+        }
         array[stack_length] = i;
         stack_length++;
         return true;
     }
-    bool pop() {
-        if (stack_length == 0) { return false; }
+    int pop() {
+        if (stack_length == 0) {
+            cout << "WARNING! Stack is empty!" << endl;
+            return -1;
+        }
         int element = array[stack_length];
         stack_length--;
         return element;
     }
     void print() {
-        cout << "Stack values: ";
+        cout << "( ";
         for (int i = 0; i < stack_length; i++) {
-            cout << array[i] << ", ";
+            cout << array[i] << " ";
         }
-        cout << endl;
+        cout << ")" << endl;
     }
 };
 
 
 int main() {
-    Power p(4, 4);
-    cout << p.calculate() << endl;
+//  1.
+    cout << "START 1" << endl;
+    Power _default;
+    _default.calculate();
 
+    Power p(4, 4);
+    p.calculate();
+    p.set(4, 3);
+    p.calculate();
+    cout << "END 1" << endl << endl;
+
+//  2.
+    cout << "START 2" << endl;
     RGBA rgba;
     rgba.print();
     rgba.set(1, 2, 3, 250);
     rgba.print();
+    rgba.setAlpha(17);
+    rgba.print();
+    cout << "END 2" << endl << endl;
 
-    Stack stack_example;
-    stack_example.print();
-    stack_example.reset();
-    stack_example.print();
-    stack_example.push(1);
-    stack_example.push(2);
-    stack_example.print();
-    cout << "pop value: " << stack_example.pop() << endl;
-    stack_example.print();
+//  3.
+    cout << "START 3" << endl;
+    Stack stack;
+    stack.reset();
+    stack.print();
+
+    stack.push(3);
+    stack.push(7);
+    stack.push(5);
+    stack.print();
+
+    stack.pop();
+    stack.print();
+
+    stack.pop();
+    stack.pop();
+    stack.print();
+    cout << "END 3 AND PROGRAM END" << endl;
 
     return 0;
 }
