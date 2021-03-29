@@ -16,13 +16,13 @@ namespace lesson2
         bool sex;
     public:
         void setName(std::string new_name);
-        std::string getName();
+        std::string const getName();
         void setAge(unsigned int new_age);
-        unsigned int getAge();
+        unsigned int const getAge();
         void setWeight(unsigned int new_weight);
-        unsigned int getWeight();
+        unsigned int const getWeight();
         void setSex(bool new_sex);
-        std::string getSex();
+        std::string const getSex();
         Person(std::string p_name, unsigned int p_age, unsigned int p_weight, bool p_sex) {
             name = p_name;
             age = p_age;
@@ -46,6 +46,9 @@ namespace lesson2
             sex = s_sex;
             year = s_year;
             studentCounter++;
+        }
+        ~Student() {
+            studentCounter--;
         }
     };
 

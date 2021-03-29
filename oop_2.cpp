@@ -18,19 +18,19 @@ void lesson2::Person::setSex(bool new_sex) {
     sex = new_sex;
 }
 
-std::string lesson2::Person::getName() {
+std::string const lesson2::Person::getName() {
     return name;
 }
 
-unsigned int lesson2::Person::getAge() {
+unsigned int const lesson2::Person::getAge() {
     return age;
 }
 
-unsigned int lesson2::Person::getWeight() {
+unsigned int const lesson2::Person::getWeight() {
     return weight;
 }
 
-std::string lesson2::Person::getSex() {
+std::string const lesson2::Person::getSex() {
     return sex ? "M" : "F";
 }
 
