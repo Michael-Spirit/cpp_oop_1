@@ -32,8 +32,13 @@ int main() {
 //  BLACKJACK.
     cout << endl << "4." << endl;
     blackjack::Card card;
-    cout << card.GetTextValue() << endl;
+    blackjack::Hand hand;
+    hand.Add(card);
+    blackjack::GenericPlayer player("Michael");
 
+    cout << "is hitting? " << player.isHitting() << endl;
+    cout << "is boosted? " << player.isBoosted() << endl;
+    player.Bust();
 
     return 0;
 }

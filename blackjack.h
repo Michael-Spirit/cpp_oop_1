@@ -142,6 +142,29 @@ namespace blackjack
             return extra_count_for_aces(total, aces);
         }
     };
+
+    class GenericPlayer {
+        std::string name;
+        Hand hand;
+    public:
+        GenericPlayer(const char *n) {
+            name = n;
+        }
+        virtual bool isHitting() {
+            if (hand.GetValue() < 21) return true;
+            else return false;
+        }
+        void addHande(Hand h) {
+            hand = h;
+        }
+        bool isBoosted() {
+            if (hand.GetValue() > 21) return true;
+            else return false;
+        }
+        void Bust() {
+            std::cout << "Dear " << name << " you have been BOOSTED!" << std::endl;
+        }
+    };
 };
 
 
