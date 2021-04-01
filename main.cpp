@@ -1,8 +1,8 @@
 #include <iostream>
 #include "oop_5.h"
+#include "oop_3.h"
 
 using namespace std;
-
 
 int main() {
 //  1.
@@ -24,6 +24,10 @@ int main() {
     cout << endl << "3." << endl;
     lesson5::StringValuePair<std::string, int> stringValuePair("Amazing", 7);
     cout << "String Pair: " << stringValuePair.first() << " " << stringValuePair.last() << endl;
+
+    cout << endl << "4." << endl;
+    lesson3::Card card;
+    cout << card.GetValue() << endl;
 
     return 0;
 }
