@@ -1,50 +1,58 @@
 #include <iostream>
+#include <vector>
+
+#include "blackjack.h"
 #include "oop_3.h"
+#include "oop_4.h"
+
 
 using namespace std;
 
 int main() {
-    cout << "1." << endl;
-    lesson3::Circle circle(5);
-    lesson3::Rectangle rectangle(3, 4);
-    lesson3::Square square(5);
-    lesson3::Rhombus rhombus(6, 8);
+//  1.
+    cout << "2." << endl;
+    lesson4::ArrayInt arrayInt;
+    arrayInt.push_back(1);
+    arrayInt.push_back(3);
+    arrayInt.push_back(2);
+    arrayInt.push_back(10);
+    arrayInt.push_back(7);
 
-    cout << "Circle area: " << circle.area() << endl;
-    cout << "Rectangle area: " << rectangle.area() << endl;
-    cout << "Square area: " << square.area() << endl;
-    cout << "Rhombus area: " << rhombus.area() << endl;
+    arrayInt.print();
+    arrayInt.sort();
+    arrayInt.print();
+    arrayInt.pop_back();
+    arrayInt.print();
+    arrayInt.pop_front();
+    arrayInt.print();
 
+
+//  2.
     cout << endl << "2." << endl;
-    lesson3::Car car("Company", "Model");
-    lesson3::PassengerCar passengerCar("Company2", "Model2");
-    lesson3::Bus bus("Bus", "Model3");
-    lesson3::Minivan minivan("Minivan", "Model4");
+    vector<int> integers = {1,2,3,3,2,1,4,6,10,2,3,5};
+    cout << "Diffs: " << lesson4::count_different_ints_in_vector(integers, integers.size()) << endl;
 
-    cout << endl << "3." << endl;
-    lesson3::Fraction fraction(1, 2);
-    lesson3::Fraction fraction2(2, 3);
-    lesson3::Fraction add = fraction + fraction2;
-    lesson3::Fraction minus = fraction2 - fraction;
-    lesson3::Fraction divide = fraction2 / fraction;
-    lesson3::Fraction multiply = fraction * fraction2;
 
-    cout << "Fraction1= "; fraction.print();
-    cout << "Fraction2= "; fraction2.print();
-    cout << "Equal? " << (fraction == fraction2) << endl;
-    cout << "Not Equal? " << (fraction != fraction2) << endl;
-    cout << "Lower or Equal? " << (fraction <= fraction2) << endl;
-    cout << "Larger or Equal? " << (fraction >= fraction2) << endl;
-    cout << "Larger? " << (fraction > fraction2) << endl;
-    cout << "Lower? " << (fraction < fraction2) << endl;
-    cout << "Add func: "; add.print();
-    cout << "Minus func: "; minus.print();
-    cout << "Divide func: "; divide.print();
-    cout << "Multiply func: "; multiply.print();
+//  blackjack
+    cout << endl << "BLACKJACK!" << endl;
+    blackjack::Hand hand;
+    blackjack::Card card;
+    blackjack::Card card2;
+    blackjack::Card card3;
+    blackjack::Card card4;
 
-    cout << endl << "4." << endl;
-    lesson3::Card card;
-    cout << card.GetValue() << endl;
+    cout << "Card1: " << card.GetTextValue() << endl;
+    cout << "Card2: " << card2.GetTextValue() << endl;
+    cout << "Card3: " << card3.GetTextValue() << endl;
+    cout << "Card4: " << card4.GetTextValue() << endl;
+
+    hand.Add(card);
+    hand.Add(card2);
+    hand.Add(card3);
+    hand.Add(card4);
+    cout << "My random hand: " << hand.GetValue() << endl;
+    hand.Clear();
+    cout << "My empty hand: " << hand.GetValue() << endl;
 
     return 0;
 }
