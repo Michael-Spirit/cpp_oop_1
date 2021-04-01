@@ -1,26 +1,58 @@
 #include <iostream>
-#include "oop_2.h"
+#include <vector>
+
+#include "blackjack.h"
+#include "oop_3.h"
+#include "oop_4.h"
+
 
 using namespace std;
 
-
-int lesson2::Student::studentCounter = 0;
-
 int main() {
-    lesson2::Student s("Michael", 25, 90, true, 2007);
-    lesson2::Student s2("Victor", 25, 95, true, 2007);
-    lesson2::Student s3("Vica", 24, 66, false, 2007);
-    std::cout << "Hello student: " << s.getName() << endl;
-    std::cout << "Total Student created: " << lesson2::Student::studentCount() << endl << endl;
+//  1.
+    cout << "2." << endl;
+    lesson4::ArrayInt arrayInt;
+    arrayInt.push_back(1);
+    arrayInt.push_back(3);
+    arrayInt.push_back(2);
+    arrayInt.push_back(10);
+    arrayInt.push_back(7);
+
+    arrayInt.print();
+    arrayInt.sort();
+    arrayInt.print();
+    arrayInt.pop_back();
+    arrayInt.print();
+    arrayInt.pop_front();
+    arrayInt.print();
+
 
 //  2.
-    lesson2::Apple a("Red");
-    lesson2::Banana b;
-    lesson2::GrannySmith c;
+    cout << endl << "2." << endl;
+    vector<int> integers = {1,2,3,3,2,1,4,6,10,2,3,5};
+    cout << "Diffs: " << lesson4::count_different_ints_in_vector(integers, integers.size()) << endl;
 
-    std::cout << "My " << a.getName() << " is " << a.getColor() << ".\n";
-    std::cout << "My " << b.getName() << " is " << b.getColor() << ".\n";
-    std::cout << "My " << c.getName() << " is " << c.getColor() << ".\n";
+
+//  blackjack
+    cout << endl << "BLACKJACK!" << endl;
+    blackjack::Hand hand;
+    blackjack::Card card;
+    blackjack::Card card2;
+    blackjack::Card card3;
+    blackjack::Card card4;
+
+    cout << "Card1: " << card.GetTextValue() << endl;
+    cout << "Card2: " << card2.GetTextValue() << endl;
+    cout << "Card3: " << card3.GetTextValue() << endl;
+    cout << "Card4: " << card4.GetTextValue() << endl;
+
+    hand.Add(card);
+    hand.Add(card2);
+    hand.Add(card3);
+    hand.Add(card4);
+    cout << "My random hand: " << hand.GetValue() << endl;
+    hand.Clear();
+    cout << "My empty hand: " << hand.GetValue() << endl;
 
     return 0;
 }
