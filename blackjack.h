@@ -1,18 +1,27 @@
-//
-// Created by Михаил Спиридонов on 01.04.2021.
-//
-
 #ifndef CPP_LESSON8_BLACKJACK_H
 #define CPP_LESSON8_BLACKJACK_H
 
+#include <vector>
+#include <sstream>
+
 namespace blackjack
 {
+    int extra_count_for_aces(int total, int aces) {
+        if (total > 21 && aces > 0) {
+            total -= 10;
+            aces--;
+            return extra_count_for_aces(total, aces);
+        } else {
+            return total;
+        }
+    }
+
     enum Suits { clubs, diamonds, hearts, spades };
     enum Value {
-        ace=1, two=2, three=3,
-        four=4, five=5, six=6,
-        seven=7, eight=8, nine=9,
-        ten=10, jack=11, queen=12, king=13
+        ace, two, three,
+        four, five, six,
+        seven, eight, nine,
+        ten, jack, queen, king
     };
 
     // just to print it nicely
@@ -61,11 +70,36 @@ namespace blackjack
         }
     }
 
+    int value_to_int(Value type) {
+        switch (type) {
+            case ace:
+                return 11;
+            case two:
+                return 2;
+            case three:
+                return 3;
+            case four:
+                return 4;
+            case five:
+                return 5;
+            case six:
+                return 6;
+            case seven:
+                return 7;
+            case eight:
+                return 8;
+            case nine:
+                return 9;
+            default:
+                return 10;
+        }
+    }
+
     class Card {
         Suits suit;
-        Value value;
         bool position;
     public:
+        Value value;
         Card() {
             // randomize values for now
             suit = static_cast<Suits>(rand() % spades);
@@ -75,13 +109,40 @@ namespace blackjack
         void flip() {
             position = !position;
         }
-        std::string GetValue() {
+        std::string GetTextValue() {
             std::ostringstream ss;
             ss << value_to_string(value) << " of " << suit_to_string(suit);
             return ss.str();
         }
+        int getValue() {
+            return value_to_int(value);
+        }
     };
-}
+
+    class Hand {
+        std::vector<Card> cards;
+    public:
+        void Add(Card card) {
+            cards.push_back(card);
+        }
+        void Clear() {
+            cards.clear();
+        }
+        int GetValue() {
+            int aces = 0;
+            int total = 0;
+
+            for (Card &card : cards) {
+                total += card.getValue();
+                if (card.value == Value::ace) {
+                    aces++;
+                }
+            }
+
+            return extra_count_for_aces(total, aces);
+        }
+    };
+};
 
 
 #endif //CPP_LESSON8_BLACKJACK_H

@@ -159,7 +159,6 @@ namespace lesson3
             std::cout << numenator << "/" << denominator << std::endl;
         }
     };
-
 }
 
 

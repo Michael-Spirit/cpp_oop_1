@@ -1,7 +1,10 @@
 #include <iostream>
-#include "oop_5.h"
+#include <vector>
+
 #include "oop_3.h"
+#include "oop_5.h"
 #include "blackjack.h"
+
 
 using namespace std;
 
@@ -26,10 +29,11 @@ int main() {
     lesson5::StringValuePair<std::string, int> stringValuePair("Amazing", 7);
     cout << "String Pair: " << stringValuePair.first() << " " << stringValuePair.last() << endl;
 
-//  4. TODO
+//  BLACKJACK.
     cout << endl << "4." << endl;
     blackjack::Card card;
-    cout << card.GetValue() << endl;
+    cout << card.GetTextValue() << endl;
+
 
     return 0;
 }
