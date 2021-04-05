@@ -117,6 +117,9 @@ namespace blackjack
         int getValue() {
             return value_to_int(value);
         }
+        const bool isOpened() {
+            return position;
+        }
     };
 
     class Hand {
@@ -141,20 +144,21 @@ namespace blackjack
 
             return extra_count_for_aces(total, aces);
         }
+        std::vector<Card> getCards() {
+            return cards;
+        }
     };
 
     class GenericPlayer {
         std::string name;
         Hand hand;
     public:
-        GenericPlayer(const char *n) {
+        explicit GenericPlayer(const char *n) {
             name = n;
         }
-        virtual bool isHitting() {
-            if (hand.GetValue() < 21) return true;
-            else return false;
-        }
-        void addHande(Hand h) {
+        virtual ~GenericPlayer() = default;
+        virtual bool isHitting() = 0;
+        void addHand(Hand h) {
             hand = h;
         }
         bool isBoosted() {
@@ -164,7 +168,55 @@ namespace blackjack
         void Bust() {
             std::cout << "Dear " << name << " you have been BOOSTED!" << std::endl;
         }
+        std::string getName() {
+            return name;
+        }
+        Hand getHand() {
+            return hand;
+        }
     };
+
+    class Player : public GenericPlayer {
+    public:
+        Player(const char *n) : GenericPlayer(n) {}
+        bool isHitting() {
+            return false;
+        };
+        const void Win() {
+            std::cout << "Congratulations! " << getName() << " you won this game!" << std::endl;
+        }
+        const void Lost() {
+            std::cout << "Game over! " << getName() << " good luck next time!" << std::endl;
+        }
+        const void Push() {
+            std::cout << "Its a Draw! " << getName() << " good luck next time!" << std::endl;
+        }
+    };
+
+    class House : public GenericPlayer {
+    public:
+        bool isHitting() {
+            return getHand().GetValue() <= 16;
+        }
+    };
+
+    std::ostream& operator<< (std::ostream &out, Card card) {
+        if (card.isOpened()) {
+            out << card.GetTextValue() << std::endl;
+        } else {
+            out << "XXX" << std::endl;
+        }
+
+        return out;
+    }
+
+    std::ostream& operator<< (std::ostream &out, GenericPlayer &genericPlayer) {
+        for (Card &card : genericPlayer.getHand().getCards()) {
+            out << card.GetTextValue() << ", ";
+        }
+        out << " (Total: " << genericPlayer.getHand().GetValue() << ")" << std::endl;
+        return out;
+    }
 };
 
 

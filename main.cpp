@@ -1,44 +1,35 @@
 #include <iostream>
-#include <vector>
 
 #include "oop_3.h"
 #include "oop_5.h"
+#include "oop_6.h"
 #include "blackjack.h"
 
 
 using namespace std;
 
 int main() {
-//  1.
-    cout << "1." << endl;
-    lesson5::Pair1<int> p1(6, 9);
-    cout << "Pair: " << p1.first() << " " << p1.second() << endl;
+//  1. & 2.
+    int input;
+    cout << "Please enter a valid int: ";
+    lesson6::cin_only_number_format(&input);
+    cout << "You inputed: " << input << lesson6::endll << "Test endll" << lesson6::endll;
 
-    const lesson5::Pair1<double> p2(3.4, 7.8);
-    cout << "Pair: " << p2.first() << " " << p2.second() << endl;
-
-//  2.
-    cout << endl << "2." << endl;
-    lesson5::Pair2<int, double> pair(6, 7.8);
-    cout << "double Pair: " << pair.first() << " " << pair.second() << endl;
-    lesson5::Pair2<double, int> pair2(3.4, 5);
-    cout << "double Pair: " << pair2.first() << " " << pair2.second() << endl;
-
-//  3.
-    cout << endl << "3." << endl;
-    lesson5::StringValuePair<std::string, int> stringValuePair("Amazing", 7);
-    cout << "String Pair: " << stringValuePair.first() << " " << stringValuePair.last() << endl;
-
-//  BLACKJACK.
+//  blackjack
     cout << endl << "4." << endl;
     blackjack::Card card;
+    blackjack::Card card2;
     blackjack::Hand hand;
     hand.Add(card);
-    blackjack::GenericPlayer player("Michael");
+    hand.Add(card2);
+    blackjack::Player player("Michael");
+    player.addHand(hand);
 
-    cout << "is hitting? " << player.isHitting() << endl;
-    cout << "is boosted? " << player.isBoosted() << endl;
-    player.Bust();
+    cout << "card: " << card << endl;
+    card.flip();
+    cout << "card: " << card << endl;
+    cout << "player: " << player << endl;
+
 
     return 0;
 }
