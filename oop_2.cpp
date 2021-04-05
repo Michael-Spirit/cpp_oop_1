@@ -42,10 +42,6 @@ void lesson2::Student::incrementYear() {
     year++;
 }
 
-unsigned int lesson2::Student::studentCount() {
-    return studentCounter;
-}
-
 std::string lesson2::Fruit::getName() {
     return name;
 }
